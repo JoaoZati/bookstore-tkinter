@@ -58,7 +58,7 @@ def view_command():
         listbox.insert(END, row)
 
 
-def seach_command():
+def search_command():
     listbox.delete(0, END)
     for row in books.search_data(title_entry.get(), author_entry.get(), year_entry.get(), isbn_entry.get()):
         listbox.insert(END, row)
@@ -121,7 +121,7 @@ listbox.bind('<<ListboxSelect>>', get_selected_row)
 b1 = Button(window, text="View All", width=12, command=view_command)
 b1.grid(row=2, column=3)
 
-b2 = Button(window, text="Seach Entry", width=12, command=seach_command)
+b2 = Button(window, text="Seach Entry", width=12, command=search_command)
 b2.grid(row=3, column=3)
 
 b3 = Button(window, text="Add Entry", width=12, command=add_command)
