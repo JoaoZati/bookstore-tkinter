@@ -42,10 +42,10 @@ def delete_command():
 
 def update_command():
     books.update_data(selected_tuple[0],
-                           title_entry.get(),
-                           author_entry.get(),
-                           year_entry.get(),
-                           isbn_entry.get())
+                      title_entry.get(),
+                      author_entry.get(),
+                      year_entry.get(),
+                      isbn_entry.get())
     row = books.search_data_by_id(selected_tuple[0])[0]
     listbox.delete(index)
     print(row)
