@@ -14,13 +14,13 @@ def close(conection):
     conection.close()
 
 
-def add_entry(title: str, author: str, year: int, isbn: int):
+def insert_data(title: str, author: str, year: int, isbn: int):
     conection, cursor = connect()
     cursor.execute(f"INSERT INTO book VALUES (NULL, '{title}', '{author}', {year}, {isbn})")
     close(conection)
 
 
-def view_all():
+def view_data():
     conection, cursor = connect()
     cursor.execute(f"SELECT * FROM book")
     rows = cursor.fetchall()
@@ -28,7 +28,7 @@ def view_all():
     return rows
 
 
-def search_entry(title="", author="", year="", isbn=""):
+def search_data(title="", author="", year="", isbn=""):
     conection, cursor = connect()
     cursor.execute(f"SELECT * FROM book WHERE title='{title}' OR author='{author}' OR year=? OR isbn=?", (year, isbn))
     rows = cursor.fetchall()
@@ -36,7 +36,7 @@ def search_entry(title="", author="", year="", isbn=""):
     return rows
 
 
-def delete_select(id: int):
+def delete_data(id: int):
     conection, cursor = connect()
     cursor.execute("DELETE FROM book WHERE id=?", (id,))
     rows = cursor.fetchall()
@@ -44,7 +44,7 @@ def delete_select(id: int):
     return rows
 
 
-def update_select(id: int, title, author, year, isbn):
+def update_data(id: int, title, author, year, isbn):
     conection, cursor = connect()
     cursor.execute("UPDATE book SET title=?, author=?, year=?, isbn=? WHERE id=?",
                    (title, author, year, isbn, id))
@@ -53,5 +53,21 @@ def update_select(id: int, title, author, year, isbn):
     return rows
 
 
-update_select(1, "The moon", "John Tablet", 1918, 913123124)
-print(view_all())
+def last_data():
+    conection, cursor = connect()
+    cursor.execute("SELECT * FROM book ORDER BY ID DESC LIMIT 1")
+    row = cursor.fetchall()
+    close(conection)
+    return row
+
+
+def search_data_by_id(id):
+    conection, cursor = connect()
+    cursor.execute("SELECT * FROM book WHERE id=?", (id,))
+    rows = cursor.fetchall()
+    close(conection)
+    return rows
+
+
+if __name__ == '__main__':
+    print(view_data())
