@@ -2,6 +2,9 @@ import sqlite3
 
 
 class Database:
+
+    type = 'database'
+
     def __init__(self, db):
         self.conection = sqlite3.connect(db)
         self.cursor = self.conection.cursor()
